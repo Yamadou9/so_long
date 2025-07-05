@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 13:44:01 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:14:24 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,37 @@ int	on_destroy(int keycode, void *param)
 	exit(0);
 	return (0);
 }
+
 void	*wall(int x, int y, t_data data)
 {
 	void	*wall;
-	int		x;
-	int		y;
+	int		i;
+	int		j;
 	
-	x = 64;
-	y = 64;
+	i = 64;
+	j = 64;
 	if (x == 0 && y == 0)
-		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/coing.xpm", &x, &y);
-	else if (x == 0 && y == data.largeur)
-		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/coind.xpm", &x, &y);
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/chg.xpm", &i, &j);
+	else if (x == 0 && y == data.largeur - 1)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/chd.xpm", &i, &j);
+	else if (x == data.longeur - 1 && y == 0)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/cbg.xpm", &i, &j);
+	else if (x == data.longeur - 1 && y == data.largeur - 1)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/cbd.xpm", &i, &j);
+	else if (x == 0)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/mh.xpm", &i, &j);
+	else if (x == data.longeur - 1)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/mb.xpm", &i, &j);
+	else if (y == 0)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/mg.xpm", &i, &j);
+	else if (y == data.largeur - 1)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/md.xpm", &i, &j);
+	else
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/soljaune.xpm", &i, &j);
+	return (wall);
 }
-void	*recup_image(char c, t_data data)
+
+void	*recup_image(char c, t_data data, int x, int y)
 {
 	void	*image;
 	int		x_fond;
@@ -71,11 +88,11 @@ void	*recup_image(char c, t_data data)
 	if (c == '0')
 		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/sol.xpm", &x_fond, &y_fond);
 	else if (c == '1')
-		image = 
+		image = wall(x, y, data);
 	else if (c == 'P')
 		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/face.xpm", &x_fond, &y_fond);
 	else if (c == 'C')
-		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/sol_death_door_1.xpm", &x_fond, &y_fond);
+		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/boule.xpm", &x_fond, &y_fond);
 	else if (c == 'E')
 		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/1.xpm", &x_fond, &y_fond);
 	return (image);

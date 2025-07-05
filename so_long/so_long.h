@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 13:43:15 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:12:17 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ typedef struct s_image
 	void	*face;
 	void	*left;
 	void	*dos;
+	void	*cointbd;
+	void	*cointhg;
+	void	*cointhd;
+	void	*cointbg;
 }	t_image;
 
 typedef struct s_perso
@@ -43,12 +47,13 @@ typedef struct s_data
 	char		**map;
 	t_image		image;
 	int			largeur;
+	int			longeur;
 }	t_data;
 
 int		is_rectangle(char *ber);
 int		len(char *s);
 char	**is_validber(char **av);
-void	*recup_image(char c, t_data data);
+void	*recup_image(char c, t_data data, int x, int y);
 void	put_sol(t_data data, int longeur, int largeur, char **ber);
 void	initialisation(t_data *data);
 int		game(int keycode, void *param);
