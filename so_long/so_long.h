@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 16:12:17 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:45:10 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_image
 	void	*cointhg;
 	void	*cointhd;
 	void	*cointbg;
+	void	*collect;
 }	t_image;
 
 typedef struct s_perso

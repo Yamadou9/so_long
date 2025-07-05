@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 16:12:03 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:46:27 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	init_image(t_data *data)
 	data->image.cointhg = mlx_xpm_file_to_image((*data).mlx_ptr, "image/chg.xpm", &x, &y);
 	data->image.cointhd = mlx_xpm_file_to_image((*data).mlx_ptr, "image/chd.xpm", &x, &y);
 	data->image.cointbg = mlx_xpm_file_to_image((*data).mlx_ptr, "image/cgb.xpm", &x, &y);
+	data->image.collect = mlx_xpm_file_to_image((*data).mlx_ptr, "image/collect.xpm", &x, &y);
 }
 
 void	initialisation(t_data *data)

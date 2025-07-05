@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 13:33:25 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:47:25 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,15 @@ int	move_up(t_data *data)
 	y = data->perso.y;
 	if (data->map[y - 1][x] != '1')
 	{
+		if (data->map[y - 1][x] == 'C')
+		{	
+			data->map[y][x] = '0';
+			data->map[y - 1][x] = 'P';
+			data->perso.y -= 1;
+			replace_image(data, data->image.sol, data->perso.y + 1, data->perso.x);
+			replace_image(data, data->image.collect, data->perso.y, data->perso.x);
+			return (1);
+		}
 		data->map[y][x] = '0';
 		data->map[y - 1][x] = 'P';
 		data->perso.y -= 1;
