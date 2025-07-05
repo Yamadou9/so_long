@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 13:11:23 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:44:01 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,19 @@ int	on_destroy(int keycode, void *param)
 	exit(0);
 	return (0);
 }
-
-// int	move_right(int keycode, void *param)
-// {
-// 	t_data	*data;
-
-// 	data = (t_data *)param;
-// 	if (data->map[data->perso.y][data->perso.x + 1] != '1' && keycode == 65363)
-// 	{
-// 		data->perso.x += 1;
-// 		data->map[data->perso.y][data->perso.x] = 'P';
-// 		data->map[data->perso.y][data->perso.x - 1] = '0';
-// 		replace_image(data, data->image.sol, data->perso.y, data->perso.x - 1);
-// 		replace_image(data, data->image.face, data->perso.y, data->perso.x);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
+void	*wall(int x, int y, t_data data)
+{
+	void	*wall;
+	int		x;
+	int		y;
+	
+	x = 64;
+	y = 64;
+	if (x == 0 && y == 0)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/coing.xpm", &x, &y);
+	else if (x == 0 && y == data.largeur)
+		wall = mlx_xpm_file_to_image(data.mlx_ptr, "image/coind.xpm", &x, &y);
+}
 void	*recup_image(char c, t_data data)
 {
 	void	*image;
@@ -76,7 +71,7 @@ void	*recup_image(char c, t_data data)
 	if (c == '0')
 		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/sol.xpm", &x_fond, &y_fond);
 	else if (c == '1')
-		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/soljaune.xpm", &x_fond, &y_fond);
+		image = 
 	else if (c == 'P')
 		image = mlx_xpm_file_to_image(data.mlx_ptr, "image/face.xpm", &x_fond, &y_fond);
 	else if (c == 'C')

@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 11:52:22 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:43:15 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 typedef struct s_image
 {
 	void	*sol;
-	void	*p_droit;
+	void	*droit;
 	void	*face;
+	void	*left;
+	void	*dos;
 }	t_image;
 
 typedef struct s_perso
@@ -40,6 +42,7 @@ typedef struct s_data
 	t_perso		perso;
 	char		**map;
 	t_image		image;
+	int			largeur;
 }	t_data;
 
 int		is_rectangle(char *ber);

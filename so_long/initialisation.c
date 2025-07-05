@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 12:15:24 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:42:58 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	put_sol(t_data data, int longeur, int largeur, char **ber)
 
 	x = 0;
 	i = 0;
+	data.largeur = largeur;
 	while (i < 64 * longeur)
 	{
 		j = 0;
@@ -70,6 +71,9 @@ void	init_image(t_data *data)
 	y = 64;
 	data->image.sol = mlx_xpm_file_to_image((*data).mlx_ptr, "image/sol.xpm", &x, &y);
 	data->image.face = mlx_xpm_file_to_image((*data).mlx_ptr, "image/face.xpm", &x, &y);
+	data->image.droit = mlx_xpm_file_to_image((*data).mlx_ptr, "image/p_droit.xpm", &x, &y);
+	data->image.left = mlx_xpm_file_to_image((*data).mlx_ptr, "image/left.xpm", &x, &y);
+	data->image.dos = mlx_xpm_file_to_image((*data).mlx_ptr, "image/dos.xpm", &x, &y);
 }
 
 void	initialisation(t_data *data)

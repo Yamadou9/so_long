@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 13:15:25 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:33:25 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	move_right(t_data *data)
 		data->map[y][x + 1] = 'P';
 		data->perso.x += 1;
 		replace_image(data, data->image.sol, data->perso.y, data->perso.x - 1);
-		replace_image(data, data->image.face, data->perso.y, data->perso.x);
+		replace_image(data, data->image.droit, data->perso.y, data->perso.x);
 		return (1);
 	}
 	return (0);
@@ -51,7 +51,7 @@ int	move_left(t_data *data)
 		data->map[y][x - 1] = 'P';
 		data->perso.x -= 1;
 		replace_image(data, data->image.sol, data->perso.y, data->perso.x + 1);
-		replace_image(data, data->image.face, data->perso.y, data->perso.x);
+		replace_image(data, data->image.left, data->perso.y, data->perso.x);
 		return (1);
 	}
 	return (0);
@@ -89,7 +89,7 @@ int	move_up(t_data *data)
 		data->map[y - 1][x] = 'P';
 		data->perso.y -= 1;
 		replace_image(data, data->image.sol, data->perso.y + 1, data->perso.x);
-		replace_image(data, data->image.face, data->perso.y, data->perso.x);
+		replace_image(data, data->image.dos, data->perso.y, data->perso.x);
 		return (1);
 	}
 	return (0);
