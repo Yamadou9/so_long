@@ -6,13 +6,13 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/05 18:47:25 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:55:37 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	replace_image(t_data *data, void *image, int y, int x)
+void	put_img(t_data *data, void *image, int y, int x)
 {
 	y = y * 64;
 	x = x * 64;
@@ -21,88 +21,122 @@ void	replace_image(t_data *data, void *image, int y, int x)
 
 int	move_right(t_data *data)
 {
-	int	y;
-	int	x;
+	int	c;
 
-	x = data->perso.x;
-	y = data->perso.y;
-	if (data->map[y][x + 1] != '1')
+	if (data->map[data->perso.y][data->perso.x + 1] == 'E')
 	{
-		data->map[y][x] = '0';
-		data->map[y][x + 1] = 'P';
-		data->perso.x += 1;
-		replace_image(data, data->image.sol, data->perso.y, data->perso.x - 1);
-		replace_image(data, data->image.droit, data->perso.y, data->perso.x);
-		return (1);
+		if (data->collect == 0)
+			close_window(data->win_ptr);
 	}
-	return (0);
+	else if (data->map[data->perso.y][data->perso.x + 1] != '1')
+	{
+		data->map[data->perso.y][data->perso.x] = '0';
+		c = data->map[data->perso.y][data->perso.x + 1];
+		data->map[data->perso.y][data->perso.x + 1] = 'P';
+		data->perso.x += 1;
+		put_img(data, data->image.sol, data->perso.y, data->perso.x - 1);
+		if (c == 'C')
+		{
+			put_img(data, data->image.collect, data->perso.y, data->perso.x);
+			data->collect--;
+			if (data->collect == 0)
+				put_img(data, data->image.door, data->exit_y, data->exit_x);
+		}
+		else
+			put_img(data, data->image.droit, data->perso.y, data->perso.x);
+	}
+	return (1);
 }
+
 
 int	move_left(t_data *data)
 {
-	int	y;
-	int	x;
+	int	c;
 
-	x = data->perso.x;
-	y = data->perso.y;
-	if (data->map[y][x - 1] != '1')
+	if (data->map[data->perso.y][data->perso.x - 1] == 'E')
 	{
-		data->map[y][x] = '0';
-		data->map[y][x - 1] = 'P';
-		data->perso.x -= 1;
-		replace_image(data, data->image.sol, data->perso.y, data->perso.x + 1);
-		replace_image(data, data->image.left, data->perso.y, data->perso.x);
-		return (1);
+		if (data->collect == 0)
+			close_window(data->win_ptr);
 	}
-	return (0);
+	else if (data->map[data->perso.y][data->perso.x - 1] != '1')
+	{
+		data->map[data->perso.y][data->perso.x] = '0';
+		c = data->map[data->perso.y][data->perso.x - 1];
+		data->map[data->perso.y][data->perso.x - 1] = 'P';
+		data->perso.x -= 1;
+		put_img(data, data->image.sol, data->perso.y, data->perso.x + 1);
+		if (c == 'C')
+		{
+			put_img(data, data->image.collect, data->perso.y, data->perso.x);
+			data->collect--;
+			if (data->collect == 0)
+				put_img(data, data->image.door, data->exit_y, data->exit_x);
+		}
+		else
+			put_img(data, data->image.left, data->perso.y, data->perso.x);
+	}
+	return (1);
 }
+
 
 int	move_down(t_data *data)
 {
-	int	y;
-	int	x;
+	int	c;
 
-	x = data->perso.x;
-	y = data->perso.y;
-	if (data->map[y + 1][x] != '1')
+	if (data->map[data->perso.y + 1][data->perso.x] == 'E')
 	{
-		data->map[y][x] = '0';
-		data->map[y + 1][x] = 'P';
-		data->perso.y += 1;
-		replace_image(data, data->image.sol, data->perso.y - 1, data->perso.x);
-		replace_image(data, data->image.face, data->perso.y, data->perso.x);
-		return (1);
+		if (data->collect == 0)
+			close_window(data->win_ptr);
 	}
-	return (0);
+	else if (data->map[data->perso.y + 1][data->perso.x] != '1')
+	{
+		data->map[data->perso.y][data->perso.x] = '0';
+		c = data->map[data->perso.y + 1][data->perso.x];
+		data->map[data->perso.y + 1][data->perso.x] = 'P';
+		data->perso.y += 1;
+		put_img(data, data->image.sol, data->perso.y - 1, data->perso.x);
+		if (c == 'C')
+		{
+			put_img(data, data->image.collect, data->perso.y, data->perso.x);
+			data->collect--;
+			if (data->collect == 0)
+				put_img(data, data->image.door, data->exit_y, data->exit_x);
+		}
+		else
+			put_img(data, data->image.face, data->perso.y, data->perso.x);
+	}
+	return (1);
 }
 
 int	move_up(t_data *data)
 {
-	int	y;
-	int	x;
+	int	c;
 
-	x = data->perso.x;
-	y = data->perso.y;
-	if (data->map[y - 1][x] != '1')
+	if (data->map[data->perso.y - 1][data->perso.x] == 'E')
 	{
-		if (data->map[y - 1][x] == 'C')
-		{	
-			data->map[y][x] = '0';
-			data->map[y - 1][x] = 'P';
-			data->perso.y -= 1;
-			replace_image(data, data->image.sol, data->perso.y + 1, data->perso.x);
-			replace_image(data, data->image.collect, data->perso.y, data->perso.x);
-			return (1);
-		}
-		data->map[y][x] = '0';
-		data->map[y - 1][x] = 'P';
-		data->perso.y -= 1;
-		replace_image(data, data->image.sol, data->perso.y + 1, data->perso.x);
-		replace_image(data, data->image.dos, data->perso.y, data->perso.x);
-		return (1);
+		if (data->collect == 0)
+			close_window(data->win_ptr);
 	}
-	return (0);
+	else if (data->map[data->perso.y - 1][data->perso.x] != '1')
+	{
+		data->map[data->perso.y][data->perso.x] = '0';
+		c = data->map[data->perso.y - 1][data->perso.x];
+		data->map[data->perso.y - 1][data->perso.x] = 'P';
+		data->perso.y -= 1;
+		put_img(data, data->image.sol, data->perso.y + 1, data->perso.x);
+		if (c == 'C')
+		{
+			put_img(data, data->image.collect, data->perso.y, data->perso.x);
+			data->collect--;
+			if (data->collect == 0)
+				put_img(data, data->image.door, data->exit_y, data->exit_x);
+		}
+		else
+			put_img(data, data->image.dos, data->perso.y, data->perso.x);
+	}
+	return (1);
 }
+
 
 int	game(int keycode, void *param)
 {

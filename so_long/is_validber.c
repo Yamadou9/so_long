@@ -6,13 +6,14 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/03 16:28:39 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:57:43 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_malloc/get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "so_long.h"
 
 int	len(char *s)
 {
@@ -42,6 +43,7 @@ char	**put_in_ber(char *fichier, int longeur)
 			break ;
 		i++;
 	}
+	ber[i] = NULL;
 	return (ber);
 }
 
@@ -137,20 +139,20 @@ int	is_lockup(char **ber, int longr)
 	return (1);
 }
 
-char	**is_validber(char **av)
+char	**is_validber(char **av, t_data *data)
 {
-	int		longeur;
 	char	**ber;
 
-	longeur = is_rectangle(av[1]);
-	ber = put_in_ber(av[1], longeur);
+	data->longeur = is_rectangle(av[1]);
+	ber = put_in_ber(av[1], data->longeur);
+	data->largeur = len(ber[0]);
 	if (!ber)
 		return (0);
-	if (!longeur)
+	if (!data->longeur)
 		return (0);
 	if (!valid_count(av[1]))
 		return (0);
-	if (!is_lockup(ber, longeur))
+	if (!is_lockup(ber, data->longeur))
 		return (0);
 	return (ber);
 }
