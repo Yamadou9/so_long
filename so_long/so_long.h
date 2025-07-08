@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/07 18:56:21 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:46:48 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct s_image
 	void	*cointhg;
 	void	*cointhd;
 	void	*cointbg;
+	void	*mur_haut;
+	void	*mur_gauche;
+	void	*mur_droit;
+	void	*mur_bas;
 	void	*collect;
 	void	*door;
 }	t_image;
@@ -58,14 +62,16 @@ typedef struct s_data
 
 int		is_rectangle(char *ber);
 int		len(char *s);
-void	*recup_image(char c, t_data data, int x, int y);
+void	*recup_image(char c, t_data *data, int x, int y);
 void	put_sol(t_data data, int longeur, int largeur, char **ber);
 void	initialisation(t_data *data);
 int		game(int keycode, void *param);
 void	put_img(t_data *data, void *image, int y, int x);
 void	its_playable(char **map, int x, int y);
 char	**is_validber(char **av, t_data *data);
-int		close_window(void *param);
+int		close_window(t_data *param);
 char	**put_in_ber(char *fichier, int longeur);
+void	free_all(char **map);
+void	free_image(t_data *data);
 
 #endif

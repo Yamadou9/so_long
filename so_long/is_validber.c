@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/07 18:57:43 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 13:15:06 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**put_in_ber(char *fichier, int longeur)
 	int		i;
 
 	i = 0;
-	ber = malloc(sizeof(char *) * longeur + 1);
+	ber = malloc(sizeof(char *) * (longeur + 1));
 	if (!ber)
 		return (0);
 	fd = open(fichier, O_RDONLY);
@@ -43,7 +43,6 @@ char	**put_in_ber(char *fichier, int longeur)
 			break ;
 		i++;
 	}
-	ber[i] = NULL;
 	return (ber);
 }
 
@@ -145,9 +144,9 @@ char	**is_validber(char **av, t_data *data)
 
 	data->longeur = is_rectangle(av[1]);
 	ber = put_in_ber(av[1], data->longeur);
-	data->largeur = len(ber[0]);
 	if (!ber)
 		return (0);
+	data->largeur = len(ber[0]);
 	if (!data->longeur)
 		return (0);
 	if (!valid_count(av[1]))

@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/07 17:14:38 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:21:16 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	nb_collect(char **map)
 	}
 	return (nb);
 }
+
 void	put_sol(t_data data, int longeur, int largeur, char **ber)
 {
 	void	*sol;
@@ -49,7 +50,7 @@ void	put_sol(t_data data, int longeur, int largeur, char **ber)
 		y = 0;
 		while (j < 64 * largeur)
 		{
-			sol = recup_image(ber[x][y], data, x, y);
+			sol = recup_image(ber[x][y], &data, x, y);
 			mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, sol, j, i);
 			j += 64;
 			y++;
@@ -105,30 +106,124 @@ void	pos_door(t_data *data)
 	}
 }
 
-void	init_image(t_data *data)
+void	*p_image(t_data *data, char *image)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	void	*img;
 
 	x = 64;
 	y = 64;
-	data->image.sol = mlx_xpm_file_to_image((*data).mlx_ptr, "image/sol.xpm", &x, &y);
-	data->image.face = mlx_xpm_file_to_image((*data).mlx_ptr, "image/face.xpm", &x, &y);
-	data->image.droit = mlx_xpm_file_to_image((*data).mlx_ptr, "image/p_droit.xpm", &x, &y);
-	data->image.left = mlx_xpm_file_to_image((*data).mlx_ptr, "image/left.xpm", &x, &y);
-	data->image.dos = mlx_xpm_file_to_image((*data).mlx_ptr, "image/dos.xpm", &x, &y);
-	data->image.cointbd = mlx_xpm_file_to_image((*data).mlx_ptr, "image/cbd.xpm", &x, &y);
-	data->image.cointhg = mlx_xpm_file_to_image((*data).mlx_ptr, "image/chg.xpm", &x, &y);
-	data->image.cointhd = mlx_xpm_file_to_image((*data).mlx_ptr, "image/chd.xpm", &x, &y);
-	data->image.cointbg = mlx_xpm_file_to_image((*data).mlx_ptr, "image/cgb.xpm", &x, &y);
-	data->image.collect = mlx_xpm_file_to_image((*data).mlx_ptr, "image/collect.xpm", &x, &y);
-	data->image.door = mlx_xpm_file_to_image((*data).mlx_ptr, "image/door_open.xpm", &x, &y);
+	img = mlx_xpm_file_to_image((*data).mlx_ptr, image, &x, &y);
+	if (!img)
+		return (0);
+	return (img);
+}
+
+void	free_image(t_data *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->image.face);
+	mlx_destroy_image(data->mlx_ptr, data->image.droit);
+	mlx_destroy_image(data->mlx_ptr, data->image.left);
+	mlx_destroy_image(data->mlx_ptr, data->image.dos);
+	mlx_destroy_image(data->mlx_ptr, data->image.sol);
+	mlx_destroy_image(data->mlx_ptr, data->image.cointbd);
+	mlx_destroy_image(data->mlx_ptr, data->image.cointhg);
+	mlx_destroy_image(data->mlx_ptr, data->image.cointhd);
+	mlx_destroy_image(data->mlx_ptr, data->image.cointbg);
+	mlx_destroy_image(data->mlx_ptr, data->image.mur_haut);
+	mlx_destroy_image(data->mlx_ptr, data->image.mur_gauche);
+	mlx_destroy_image(data->mlx_ptr, data->image.mur_droit);
+	mlx_destroy_image(data->mlx_ptr, data->image.mur_bas);
+	mlx_destroy_image(data->mlx_ptr, data->image.collect);
+	mlx_destroy_image(data->mlx_ptr, data->image.door);
+}
+
+
+void init_imagenull(t_data *data)
+{
+	data->image.face = NULL;
+	data->image.droit = NULL;
+	data->image.left = NULL;
+	data->image.dos = NULL;
+	data->image.collect = NULL;
+	data->image.door = NULL;
+	data->image.sol = NULL;
+	data->image.mur_bas = NULL;
+	data->image.mur_gauche = NULL;
+	data->image.mur_haut = NULL;
+	data->image.mur_droit = NULL;
+	data->image.cointbd = NULL;
+	data->image.cointbg = NULL;
+	data->image.cointhd = NULL;
+	data->image.cointhg = NULL;
+}
+
+int	init_image(t_data *data)
+{
+	init_imagenull(data);
+	data->image.sol = p_image(data, "image/sol.xpm");
+	if (!data->image.sol)
+		return (free_image(data), 0);
+	data->image.face = p_image(data, "image/face.xpm");
+	if (!data->image.face)
+		return (free_image(data), 0);
+	data->image.droit = p_image(data, "image/p_droit.xpm");
+	if (!data->image.droit)
+		return (free_image(data), 0);
+	data->image.left = p_image(data, "image/left.xpm");
+	if (!data->image.left)
+		return (free_image(data), 0);
+	data->image.dos = p_image(data, "image/dos.xpm");
+	if (!data->image.dos)
+		return (free_image(data), 0);
+	data->image.collect = p_image(data, "image/collect.xpm");
+	if (!data->image.collect)
+		return (free_image(data), 0);
+	data->image.door = p_image(data, "image/door_open.xpm");
+	if (!data->image.door)
+		return (free_image(data), 0);
+	return (1);
+}
+
+int	init_image2(t_data *data)
+{
+	data->image.mur_bas = p_image(data, "image/mb.xpm");
+	if (!data->image.mur_bas)
+		return (free_image(data), 0);
+	data->image.mur_droit = p_image(data, "image/md.xpm");
+	if (!data->image.mur_droit)
+		return (free_image(data), 0);
+	data->image.mur_gauche = p_image(data, "image/mg.xpm");
+	if (!data->image.mur_gauche)
+		return (free_image(data), 0);
+	data->image.mur_haut = p_image(data, "image/mh.xpm");
+	if (!data->image.mur_haut)
+		return (free_image(data), 0);
+	data->image.cointbd = p_image(data, "image/cbd.xpm");
+	if (!data->image.cointbd)
+		return (free_image(data), 0);
+	data->image.cointbg = p_image(data, "image/cbg.xpm");
+	if (!data->image.cointbg)
+		return (free_image(data), 0);
+	data->image.cointhd = p_image(data, "image/chd.xpm");
+	if (!data->image.cointhd)
+		return (free_image(data), 0);
+	data->image.cointhg = p_image(data, "image/chg.xpm");
+	if (!data->image.cointhg)
+		return (free_image(data), 0);
+	return (1);
 }
 
 void	initialisation(t_data *data)
 {
 	pos_perso(data);
 	pos_door(data);
-	init_image(data);
+	if (!init_image(data) || !init_image2(data))
+	{
+		ft_printf("Erreur : chargement d’image échoué\n");
+		exit(1);
+	}
 	data->collect = nb_collect(data->map);
 }
+

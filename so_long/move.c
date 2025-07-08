@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/07 18:55:37 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 13:24:24 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	move_right(t_data *data)
 	if (data->map[data->perso.y][data->perso.x + 1] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data->win_ptr);
+			close_window(data);
 	}
 	else if (data->map[data->perso.y][data->perso.x + 1] != '1')
 	{
@@ -56,7 +56,7 @@ int	move_left(t_data *data)
 	if (data->map[data->perso.y][data->perso.x - 1] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data->win_ptr);
+			close_window(data);
 	}
 	else if (data->map[data->perso.y][data->perso.x - 1] != '1')
 	{
@@ -86,7 +86,7 @@ int	move_down(t_data *data)
 	if (data->map[data->perso.y + 1][data->perso.x] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data->win_ptr);
+			close_window(data);
 	}
 	else if (data->map[data->perso.y + 1][data->perso.x] != '1')
 	{
@@ -115,7 +115,7 @@ int	move_up(t_data *data)
 	if (data->map[data->perso.y - 1][data->perso.x] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data->win_ptr);
+			close_window(data);
 	}
 	else if (data->map[data->perso.y - 1][data->perso.x] != '1')
 	{
