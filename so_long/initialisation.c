@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 16:47:33 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:34:29 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int	init_image2(t_data *data)
 	data->image.cointhg = p_image(data, "image/chg.xpm");
 	if (!data->image.cointhg)
 		return (free_image(data), 0);
-	data->image.trou = p_image(data, "image/soljaune.xpm");
+	data->image.trou = p_image(data, "image/trou.xpm");
 	if (!data->image.trou)
 		return (free_image(data), 0);
 	data->image.door_close = p_image(data, "image/door_close.xpm");

@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 17:23:31 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:28:14 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (free_all(data.map), free_all(data.map_bis), 0);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * (len(data.map[0])), 64 * is_rectangle(av[1]), "yo");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * (len(data.map[0])), 64 * is_rectangle(av[1]), "so_long");
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr), free_all(data.map), free_all(data.map_bis), 0);
 	initialisation(&data);
