@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 13:15:06 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:42:12 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,21 @@ int	count(char *line, int c)
 	return (count);
 }
 
+int	other(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '0' || line[i] != '1'
+			|| line[i] != 'C' || line[i] != 'P' || line[i] != 'E')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	is_rectangle(char *ber)
 {
 	char	*line;
@@ -106,6 +121,8 @@ int	valid_count(char *ber)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		if (!other(line))
+			return (0);
 		count_e += count(line, 'E');
 		count_p += count(line, 'P');
 		count_c += count(line, 'C');
