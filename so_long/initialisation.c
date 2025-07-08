@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 16:21:16 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:47:33 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ void	free_image(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->image.mur_bas);
 	mlx_destroy_image(data->mlx_ptr, data->image.collect);
 	mlx_destroy_image(data->mlx_ptr, data->image.door);
+	mlx_destroy_image(data->mlx_ptr, data->image.boule);
+	mlx_destroy_image(data->mlx_ptr, data->image.trou);
+	mlx_destroy_image(data->mlx_ptr, data->image.door_close);
 }
 
 
@@ -157,6 +160,8 @@ void init_imagenull(t_data *data)
 	data->image.cointbg = NULL;
 	data->image.cointhd = NULL;
 	data->image.cointhg = NULL;
+	data->image.boule = NULL;
+	data->image.door_close = NULL;
 }
 
 int	init_image(t_data *data)
@@ -182,6 +187,9 @@ int	init_image(t_data *data)
 		return (free_image(data), 0);
 	data->image.door = p_image(data, "image/door_open.xpm");
 	if (!data->image.door)
+		return (free_image(data), 0);
+	data->image.boule = p_image(data, "image/boule.xpm");
+	if (!data->image.boule)
 		return (free_image(data), 0);
 	return (1);
 }
@@ -211,6 +219,12 @@ int	init_image2(t_data *data)
 		return (free_image(data), 0);
 	data->image.cointhg = p_image(data, "image/chg.xpm");
 	if (!data->image.cointhg)
+		return (free_image(data), 0);
+	data->image.trou = p_image(data, "image/soljaune.xpm");
+	if (!data->image.trou)
+		return (free_image(data), 0);
+	data->image.door_close = p_image(data, "image/door_close.xpm");
+	if (!data->image.door_close)
 		return (free_image(data), 0);
 	return (1);
 }

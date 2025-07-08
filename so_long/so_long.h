@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 15:46:48 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:46:10 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_image
 	void	*mur_bas;
 	void	*collect;
 	void	*door;
+	void	*boule;
+	void	*trou;
+	void	*door_close;
 }	t_image;
 
 typedef struct s_perso

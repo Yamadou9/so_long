@@ -4,7 +4,7 @@ static char *result[] = {
 "64 64 5 1 ",
 "  c black",
 ". c #565353",
-"X c #5A803B",
+"X c #160041",
 "o c #8D8282",
 "O c #F4F4F4",
 /* pixels */

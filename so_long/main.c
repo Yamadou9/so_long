@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 16:25:55 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:23:31 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ int	on_destroy(int keycode, void *param)
 void	*wall(int x, int y, t_data *data)
 {
 	void	*wall;
-	int		i;
-	int		j;
 	
-	i = 64;
-	j = 64;
 	if (x == 0 && y == 0)
 		wall = data->image.cointhg;
 	else if (x == 0 && y == (*data).largeur - 1)
@@ -76,28 +72,24 @@ void	*wall(int x, int y, t_data *data)
 	else if (y == (*data).largeur - 1)
 		wall = data->image.mur_droit;
 	else
-		wall = mlx_xpm_file_to_image((*data).mlx_ptr, "image/soljaune.xpm", &i, &j);
+		wall = data->image.trou;
 	return (wall);
 }
 
 void	*recup_image(char c, t_data *data, int x, int y)
 {
 	void	*image;
-	int		x_fond;
-	int		y_fond;
-	
-	x_fond = 64;
-	y_fond = 64;
+
 	if (c == '0')
-		image = mlx_xpm_file_to_image((*data).mlx_ptr, "image/sol.xpm", &x_fond, &y_fond);
+		image = data->image.sol;
 	else if (c == '1')
 		image = wall(x, y, data);
 	else if (c == 'P')
 		image = data->image.face;
 	else if (c == 'C')
-		image = data->image.collect;
+		image = data->image.boule;
 	else if (c == 'E')
-		image = mlx_xpm_file_to_image((*data).mlx_ptr, "image/door_close.xpm", &x_fond, &y_fond);
+		image = data->image.door_close;
 	return (image);		
 }
 
@@ -119,7 +111,7 @@ int	main(int ac, char **av)
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr), free_all(data.map), free_all(data.map_bis), 0);
 	initialisation(&data);
-	//its_playable(data.map_bis, data.perso.x, data.perso.y);
+	its_playable(data.map_bis, data.perso.y, data.perso.x);
 	put_sol(data, data.longeur, data.largeur, data.map);
 	mlx_key_hook(data.win_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);

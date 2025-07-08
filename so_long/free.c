@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 12:58:27 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 13:00:42 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:52:07 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	free_all(char **map)
 		free(map[i]);
 		i++;
 	}
+	free(map);
 }
