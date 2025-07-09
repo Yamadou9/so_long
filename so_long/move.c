@@ -141,22 +141,38 @@ int	move_up(t_data *data)
 int	game(int keycode, void *param)
 {
 	t_data	*data;
-	static int		pas;
 
-	pas = 0;
 	data = (t_data *)param;
 	if (keycode == 65363)
-		move_right(data);
+	{
+		if (move_right(data))
+		{
+			data->nb_pas++;
+			ft_printf("Nombres de pas : %d\n", data->nb_pas);
+		}
+	}
 	if (keycode == 65361)
-		move_left(data);
+	{
+		if (move_left(data))
+		{
+			data->nb_pas++;
+			ft_printf("Nombres de pas : %d\n", data->nb_pas);
+		}
+	}
 	if (keycode == 65364)
-		move_down(data);
+	{
+		if (move_down(data))
+		{
+			data->nb_pas++;
+			ft_printf("Nombres de pas : %d\n", data->nb_pas);
+		}
+	}
 	if (keycode == 65362)
 	{
 		if (move_up(data))
 		{
-			pas++;
-			printf("Nombres de pas : %d\n", pas);
+			data->nb_pas++;
+			ft_printf("Nombres de pas : %d\n", data->nb_pas);
 		}
 	}
 	return (0);

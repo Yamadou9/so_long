@@ -238,6 +238,7 @@ void	initialisation(t_data *data)
 		ft_printf("Erreur : chargement d’image échoué\n");
 		exit(1);
 	}
+	data->nb_pas = 0;
 	data->collect = nb_collect(data->map);
 }
 

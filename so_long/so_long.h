@@ -61,6 +61,7 @@ typedef struct s_data
 	int			collect;
 	int			exit_y;
 	int			exit_x;
+	int			nb_pas;
 }	t_data;
 
 int		is_rectangle(char *ber);
