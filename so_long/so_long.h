@@ -70,11 +70,12 @@ void	put_sol(t_data data, int longeur, int largeur, char **ber);
 void	initialisation(t_data *data);
 int		game(int keycode, void *param);
 void	put_img(t_data *data, void *image, int y, int x);
-void	its_playable(char **map, int x, int y);
+int		its_playable(t_data *data, char **map, int x, int y);
 char	**is_validber(char **av, t_data *data);
 int		close_window(t_data *param);
-char	**put_in_ber(char *fichier, int longeur);
+char	**put_in_ber(char *fichier);
 void	free_all(char **map);
 void	free_image(t_data *data);
+int		count(char *line, int c);
 
 #endif

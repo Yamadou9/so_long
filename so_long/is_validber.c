@@ -25,25 +25,22 @@ int	len(char *s)
 	return (i);
 }
 
-char	**put_in_ber(char *fichier, int longeur)
+int count_lines(char *fichier)
 {
-	char	**ber;
 	int		fd;
-	int		i;
+	int		count = 0;
+	char	*line;
 
-	i = 0;
-	ber = malloc(sizeof(char *) * (longeur + 1));
-	if (!ber)
-		return (0);
 	fd = open(fichier, O_RDONLY);
-	while (1)
+	if (fd < 0)
+		return (0);
+	while ((line = get_next_line(fd)))
 	{
-		ber[i] = get_next_line(fd);
-		if (!ber[i])
-			break ;
-		i++;
+		count++;
+		free(line);
 	}
-	return (ber);
+	close(fd);
+	return (count);
 }
 
 int	count(char *line, int c)
@@ -62,6 +59,29 @@ int	count(char *line, int c)
 	return (count);
 }
 
+char	**put_in_ber(char *fichier)
+{
+	char	**ber;
+	int		fd;
+	int		i = 0;
+	int		total_lines = count_lines(fichier);
+
+	ber = malloc(sizeof(char *) * (total_lines + 1));
+	if (!ber)
+		return (0);
+	fd = open(fichier, O_RDONLY);
+	while (i < total_lines)
+	{
+		ber[i] = get_next_line(fd);
+		if (!ber[i])
+			break ;
+		i++;
+	}
+	ber[i] = NULL;
+	close(fd);
+	return (ber);
+}
+
 int	other(char *line)
 {
 	int	i;
@@ -69,12 +89,13 @@ int	other(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '0' || line[i] != '1'
-			|| line[i] != 'C' || line[i] != 'P' || line[i] != 'E')
-			return (0);
+		if (line[i] != '0' && line[i] != '1'
+			&& line[i] != 'C' && line[i] != 'P' && line[i] != 'E'
+			&& line[i] != '\n' && line[i] != '\0')
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	is_rectangle(char *ber)
@@ -111,7 +132,9 @@ int	valid_count(char *ber)
 	int		count_p;
 	int		count_e;
 	int		count_c;
+	int		c_other;
 
+	c_other = 0;
 	count_p = 0;
 	count_e = 0;
 	count_c = 0;
@@ -121,14 +144,14 @@ int	valid_count(char *ber)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (!other(line))
-			return (0);
+		c_other += other(line);
 		count_e += count(line, 'E');
 		count_p += count(line, 'P');
 		count_c += count(line, 'C');
 		free(line);
 	}
-	if (count_c >= 1 && count_e == 1 && count_p == 1)
+	close(fd);
+	if (count_c >= 1 && count_e == 1 && count_p == 1 && c_other == 0)
 		return (1);
 	return (0);
 }
@@ -160,38 +183,15 @@ char	**is_validber(char **av, t_data *data)
 	char	**ber;
 
 	data->longeur = is_rectangle(av[1]);
-	ber = put_in_ber(av[1], data->longeur);
+	ber = put_in_ber(av[1]);
 	if (!ber)
 		return (0);
 	data->largeur = len(ber[0]);
-	if (!data->longeur)
-		return (0);
 	if (!valid_count(av[1]))
-		return (0);
+		return (free_all(ber), NULL);
+	if (!data->longeur)
+		return (free_all(ber), NULL);
 	if (!is_lockup(ber, data->longeur))
-		return (0);
+		return (free_all(ber), NULL);
 	return (ber);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	char *res;
-// 	int fd = open(av[1], O_RDONLY);
-// 	int i = 0;
-
-// 	(void)ac;
-// 	while (i < 49)
-// 	{
-// 		res = get_next_line(fd);
-// 		printf("%s", res);
-// 		free(res);
-// 		i++;
-// 	}
-// }
-
-// int	main(void)
-// {
-// 	char *caca;
-// 	caca = "1000001";
-// 	printf("%d", count(caca + ft_len(caca, 0) - 1, '1'));
-// }

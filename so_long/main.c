@@ -100,7 +100,7 @@ int	main(int ac, char **av)
 	(void)ac;
 	data.map = is_validber(av, &data);
 	if (!data.map)
-		return (0);
+		return (free(data.map), 0);
 	data.map_bis = is_validber(av, &data);
 	if (!data.map_bis)
 		return (free_all(data.map), 0);
@@ -111,7 +111,8 @@ int	main(int ac, char **av)
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr), free_all(data.map), free_all(data.map_bis), 0);
 	initialisation(&data);
-	its_playable(data.map_bis, data.perso.y, data.perso.x);
+	if (!its_playable(&data, data.map_bis, data.perso.y, data.perso.x))
+		return (close_window(&data), 0);
 	put_sol(data, data.longeur, data.largeur, data.map);
 	mlx_key_hook(data.win_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);

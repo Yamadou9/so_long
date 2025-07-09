@@ -96,8 +96,8 @@ void	pos_door(t_data *data)
 		{
 			if (((*data).map[i][j]) == 'E')
 			{
-				(*data).exit_x = j;
 				(*data).exit_y = i;
+				(*data).exit_x = j;
 				return ;
 			}
 			j++;

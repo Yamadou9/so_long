@@ -114,8 +114,8 @@ int	move_up(t_data *data)
 
 	if (data->map[data->perso.y - 1][data->perso.x] == 'E')
 	{
-		if (data->collect == 0)
-			close_window(data);
+		if (data->collect == 0)	
+			return (close_window(data), 1);
 	}
 	else if (data->map[data->perso.y - 1][data->perso.x] != '1')
 	{
@@ -129,10 +129,10 @@ int	move_up(t_data *data)
 			put_img(data, data->image.collect, data->perso.y, data->perso.x);
 			data->collect--;
 			if (data->collect == 0)
-				put_img(data, data->image.door, data->exit_y, data->exit_x);
+				return (put_img(data, data->image.door, data->exit_y, data->exit_x), 1);
 		}
 		else
-			put_img(data, data->image.dos, data->perso.y, data->perso.x);
+			return (put_img(data, data->image.dos, data->perso.y, data->perso.x), 1);
 	}
 	return (1);
 }
@@ -141,7 +141,9 @@ int	move_up(t_data *data)
 int	game(int keycode, void *param)
 {
 	t_data	*data;
+	static int		pas;
 
+	pas = 0;
 	data = (t_data *)param;
 	if (keycode == 65363)
 		move_right(data);
@@ -150,6 +152,12 @@ int	game(int keycode, void *param)
 	if (keycode == 65364)
 		move_down(data);
 	if (keycode == 65362)
-		move_up(data);
+	{
+		if (move_up(data))
+		{
+			pas++;
+			printf("Nombres de pas : %d\n", pas);
+		}
+	}
 	return (0);
 }
