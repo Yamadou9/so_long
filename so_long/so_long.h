@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 16:46:10 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:22:13 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_data
 	int			nb_pas;
 }	t_data;
 
-int		is_rectangle(char *ber);
+int		is_rectangle(char **ber);
 int		len(char *s);
 void	*recup_image(char c, t_data *data, int x, int y);
 void	put_sol(t_data data, int longeur, int largeur, char **ber);
@@ -78,5 +78,7 @@ char	**put_in_ber(char *fichier);
 void	free_all(char **map);
 void	free_image(t_data *data);
 int		count(char *line, int c);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char *s1, char const *s2);
 
 #endif

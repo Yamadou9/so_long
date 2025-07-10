@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 17:28:14 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/10 12:26:05 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,33 +90,32 @@ void	*recup_image(char c, t_data *data, int x, int y)
 		image = data->image.boule;
 	else if (c == 'E')
 		image = data->image.door_close;
-	return (image);		
+	return (image);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	data;
-	
+
 	(void)ac;
 	data.map = is_validber(av, &data);
 	if (!data.map)
-		return (free(data.map), 0);
+		return (write(2, "map no valid\n", 14), free(data.map), 0);
 	data.map_bis = is_validber(av, &data);
 	if (!data.map_bis)
 		return (free_all(data.map), 0);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (free_all(data.map), free_all(data.map_bis), 0);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * (len(data.map[0])), 64 * is_rectangle(av[1]), "so_long");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
 	if (!data.win_ptr)
-		return (free(data.mlx_ptr), free_all(data.map), free_all(data.map_bis), 0);
+		return (write(1, "fenetre non cree\n", 18), free_all(data.map), free_all(data.map_bis), 0);
 	initialisation(&data);
 	if (!its_playable(&data, data.map_bis, data.perso.y, data.perso.x))
-		return (close_window(&data), 0);
+		return (ft_printf("Map non playable\n"), close_window(&data), 0);
 	put_sol(data, data.longeur, data.largeur, data.map);
 	mlx_key_hook(data.win_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
- 	mlx_loop(data.mlx_ptr);
+	mlx_loop(data.mlx_ptr);
 	return (0);
 }
-	

@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 17:42:12 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/10 15:35:05 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@ int	len(char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] && s[i] != '\n')
 		i++;
 	return (i);
 }
 
-int count_lines(char *fichier)
+int	count_lines(char *fichier)
 {
 	int		fd;
-	int		count = 0;
+	int		count;
 	char	*line;
 
+	count = 0;
 	fd = open(fichier, O_RDONLY);
 	if (fd < 0)
 		return (0);
@@ -52,6 +55,8 @@ int	count(char *line, int c)
 	i = 0;
 	while (line[i])
 	{
+		if (line[i] == '\n')
+			break ;
 		if (line[i] == c)
 			count++;
 		i++;
@@ -59,27 +64,31 @@ int	count(char *line, int c)
 	return (count);
 }
 
+
 char	**put_in_ber(char *fichier)
 {
-	char	**ber;
-	int		fd;
-	int		i = 0;
-	int		total_lines = count_lines(fichier);
+	char		**ber;
+	int			fd;
+	char		*total;
+	char		*line;
 
-	ber = malloc(sizeof(char *) * (total_lines + 1));
-	if (!ber)
-		return (0);
+	total = NULL;
 	fd = open(fichier, O_RDONLY);
-	while (i < total_lines)
+	while (1)
 	{
-		ber[i] = get_next_line(fd);
-		if (!ber[i])
+		line = get_next_line(fd);
+		if (!line)
 			break ;
-		i++;
+		total = ft_strjoin(total, line);
+		if (!total)
+			return (free(line), NULL);
+		free(line);
 	}
-	ber[i] = NULL;
 	close(fd);
-	return (ber);
+	ber = ft_split(total, '\n');
+	if (!ber)
+		return (free(total), NULL);
+	return (free(total), ber);
 }
 
 int	other(char *line)
@@ -98,79 +107,66 @@ int	other(char *line)
 	return (0);
 }
 
-int	is_rectangle(char *ber)
+int	is_rectangle(char **ber)
 {
-	char	*line;
 	int		size;
-	int		fd;
 	int		longueur;
+	int		i;
 
-	longueur = 1;
-	fd = open(ber, O_RDONLY);
-	line = get_next_line(fd);
-	if (!line)
-		return (0);
-	size = ft_len(line, 0);
-	free(line);
-	while (1)
+	i = 0;
+	longueur = 0;
+	size = len(ber[i]);
+	while (ber[i])
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (size != ft_len(line, 0))
-			return (free(line), 0);
-		free(line);
+		if (size != len(ber[i]))
+			return (0);
 		longueur++;
+		i++;
 	}
 	return (longueur);
 }
 
-int	valid_count(char *ber)
+int	valid_count(char **ber)
 {
-	char	*line;
-	int		fd;
 	int		count_p;
 	int		count_e;
 	int		count_c;
 	int		c_other;
+	int		i;
 
+	i = 0;
 	c_other = 0;
 	count_p = 0;
 	count_e = 0;
 	count_c = 0;
-	fd = open(ber, O_RDONLY);
-	while (1)
+	while (ber[i])
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		c_other += other(line);
-		count_e += count(line, 'E');
-		count_p += count(line, 'P');
-		count_c += count(line, 'C');
-		free(line);
+		c_other += other(ber[i]);
+		count_e += count(ber[i], 'E');
+		count_p += count(ber[i], 'P');
+		count_c += count(ber[i], 'C');
+		i++;
 	}
-	close(fd);
 	if (count_c >= 1 && count_e == 1 && count_p == 1 && c_other == 0)
 		return (1);
 	return (0);
 }
 
-int	is_lockup(char **ber, int longr)
+int	is_lockup(t_data *data, char **ber, int longr)
 {
 	int		i;
 
 	i = 0;
 	while (ber[i])
 	{
-		if (i == 0 || i == longr)
+		if (i == 0 || i == longr - 1)
 		{
 			if (count(ber[i], '1') != len(ber[i]))
 				return (0);
 		}
 		else
 		{
-			if (ber[i][0] != '1' || ber[i][len(ber[i]) - 1] != '1')
+			if (ber[i][0] != '1' || ber[i][data->largeur - 1] != '1')
 				return (0);
 		}
 		i++;
@@ -182,16 +178,19 @@ char	**is_validber(char **av, t_data *data)
 {
 	char	**ber;
 
-	data->longeur = is_rectangle(av[1]);
 	ber = put_in_ber(av[1]);
 	if (!ber)
 		return (0);
+	data->longeur = is_rectangle(ber);
+	if (!data->longeur)
+		return (free_all(ber), NULL);
 	data->largeur = len(ber[0]);
-	if (!valid_count(av[1]))
+	if (!valid_count(ber))
 		return (free_all(ber), NULL);
 	if (!data->longeur)
 		return (free_all(ber), NULL);
-	if (!is_lockup(ber, data->longeur))
+	if (!is_lockup(data, ber, data->longeur))
 		return (free_all(ber), NULL);
 	return (ber);
 }
+
