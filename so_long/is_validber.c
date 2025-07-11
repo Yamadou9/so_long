@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/10 15:35:05 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:26:59 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "so_long.h"
-
-int	len(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != '\n')
-		i++;
-	return (i);
-}
-
-int	count_lines(char *fichier)
-{
-	int		fd;
-	int		count;
-	char	*line;
-
-	count = 0;
-	fd = open(fichier, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	while ((line = get_next_line(fd)))
-	{
-		count++;
-		free(line);
-	}
-	close(fd);
-	return (count);
-}
-
-int	count(char *line, int c)
-{
-	int	i;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\n')
-			break ;
-		if (line[i] == c)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 
 char	**put_in_ber(char *fichier)
 {
@@ -89,22 +39,6 @@ char	**put_in_ber(char *fichier)
 	if (!ber)
 		return (free(total), NULL);
 	return (free(total), ber);
-}
-
-int	other(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != '0' && line[i] != '1'
-			&& line[i] != 'C' && line[i] != 'P' && line[i] != 'E'
-			&& line[i] != '\n' && line[i] != '\0')
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 int	is_rectangle(char **ber)
@@ -193,4 +127,3 @@ char	**is_validber(char **av, t_data *data)
 		return (free_all(ber), NULL);
 	return (ber);
 }
-

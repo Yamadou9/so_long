@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/10 12:26:05 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:51:05 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	close_window(t_data *data)
 {
-	// t_data	*data;
-
-	// data = (t_data *)param;
 	free_all(data->map);
 	free_all(data->map_bis);
 	free_image(data);
@@ -30,7 +27,6 @@ int	close_window(t_data *data)
 int	handle_keypress(int keycode, void *param)
 {
 	(void)param;
-
 	ft_printf("tu appuie sur la touche : %d \n", keycode);
 	if (keycode == 65307)
 		return (1);
@@ -54,7 +50,7 @@ int	on_destroy(int keycode, void *param)
 void	*wall(int x, int y, t_data *data)
 {
 	void	*wall;
-	
+
 	if (x == 0 && y == 0)
 		wall = data->image.cointhg;
 	else if (x == 0 && y == (*data).largeur - 1)
@@ -97,7 +93,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	(void)ac;
+	if (ac != 2)
+		return (0);
 	data.map = is_validber(av, &data);
 	if (!data.map)
 		return (write(2, "map no valid\n", 14), free(data.map), 0);
@@ -109,11 +106,13 @@ int	main(int ac, char **av)
 		return (free_all(data.map), free_all(data.map_bis), 0);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
 	if (!data.win_ptr)
-		return (write(1, "fenetre non cree\n", 18), free_all(data.map), free_all(data.map_bis), 0);
+	{
+		write(2, "fenetre non cree\n", 18);
+		return (free_all(data.map), free_all(data.map_bis), 0);
+	}
 	initialisation(&data);
 	if (!its_playable(&data, data.map_bis, data.perso.y, data.perso.x))
-		return (ft_printf("Map non playable\n"), close_window(&data), 0);
-	put_sol(data, data.longeur, data.largeur, data.map);
+		return (write(2, "Map non playable\n", 17), close_window(&data), 0);
 	mlx_key_hook(data.win_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);

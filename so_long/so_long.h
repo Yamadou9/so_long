@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/10 13:22:13 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:13:45 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include"mlx/mlx.h"
 # include "printf/ft_printf.h"
+# include "get_next_line_malloc/get_next_line.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <X11/X.h>
@@ -80,5 +81,12 @@ void	free_image(t_data *data);
 int		count(char *line, int c);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char *s1, char const *s2);
+int		init_image(t_data *data);
+int		init_image2(t_data *data);
+int		init_image3(t_data *data);
+void 	put_sol(t_data data, int longeur, int largeur, char **ber);
+void	free_image(t_data *data);
+void	*p_image(t_data *data, char *image);
+int		other(char *line);
 
-#endif
+# endif

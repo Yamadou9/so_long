@@ -6,11 +6,24 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:15 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/10 12:45:29 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:20:59 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_all(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
 
 int	ft_countword(char const *s, char c)
 {

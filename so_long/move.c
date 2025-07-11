@@ -6,18 +6,11 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/08 13:24:24 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:28:09 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	put_img(t_data *data, void *image, int y, int x)
-{
-	y = y * 64;
-	x = x * 64;
-	mlx_put_image_to_window((*data).mlx_ptr, (*data).win_ptr, image, x, y);
-}
 
 int	move_right(t_data *data)
 {
@@ -26,7 +19,7 @@ int	move_right(t_data *data)
 	if (data->map[data->perso.y][data->perso.x + 1] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	else if (data->map[data->perso.y][data->perso.x + 1] != '1')
 	{
@@ -44,10 +37,10 @@ int	move_right(t_data *data)
 		}
 		else
 			put_img(data, data->image.droit, data->perso.y, data->perso.x);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
-
 
 int	move_left(t_data *data)
 {
@@ -56,7 +49,7 @@ int	move_left(t_data *data)
 	if (data->map[data->perso.y][data->perso.x - 1] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	else if (data->map[data->perso.y][data->perso.x - 1] != '1')
 	{
@@ -74,10 +67,10 @@ int	move_left(t_data *data)
 		}
 		else
 			put_img(data, data->image.left, data->perso.y, data->perso.x);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
-
 
 int	move_down(t_data *data)
 {
@@ -86,7 +79,7 @@ int	move_down(t_data *data)
 	if (data->map[data->perso.y + 1][data->perso.x] == 'E')
 	{
 		if (data->collect == 0)
-			close_window(data);
+			return (close_window(data), 1);
 	}
 	else if (data->map[data->perso.y + 1][data->perso.x] != '1')
 	{
@@ -104,8 +97,9 @@ int	move_down(t_data *data)
 		}
 		else
 			put_img(data, data->image.face, data->perso.y, data->perso.x);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	move_up(t_data *data)
@@ -114,7 +108,7 @@ int	move_up(t_data *data)
 
 	if (data->map[data->perso.y - 1][data->perso.x] == 'E')
 	{
-		if (data->collect == 0)	
+		if (data->collect == 0)
 			return (close_window(data), 1);
 	}
 	else if (data->map[data->perso.y - 1][data->perso.x] != '1')
@@ -129,51 +123,35 @@ int	move_up(t_data *data)
 			put_img(data, data->image.collect, data->perso.y, data->perso.x);
 			data->collect--;
 			if (data->collect == 0)
-				return (put_img(data, data->image.door, data->exit_y, data->exit_x), 1);
+				put_img(data, data->image.door, data->exit_y, data->exit_x);
 		}
 		else
-			return (put_img(data, data->image.dos, data->perso.y, data->perso.x), 1);
+			put_img(data, data->image.dos, data->perso.y, data->perso.x);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 
 int	game(int keycode, void *param)
 {
 	t_data	*data;
+	int		moved;
 
+	moved = 0;
 	data = (t_data *)param;
 	if (keycode == 65363)
-	{
-		if (move_right(data))
-		{
-			data->nb_pas++;
-			ft_printf("Nombres de pas : %d\n", data->nb_pas);
-		}
-	}
+		moved = move_right(data);
 	if (keycode == 65361)
-	{
-		if (move_left(data))
-		{
-			data->nb_pas++;
-			ft_printf("Nombres de pas : %d\n", data->nb_pas);
-		}
-	}
+		moved = move_left(data);
 	if (keycode == 65364)
-	{
-		if (move_down(data))
-		{
-			data->nb_pas++;
-			ft_printf("Nombres de pas : %d\n", data->nb_pas);
-		}
-	}
+		moved = move_down(data);
 	if (keycode == 65362)
+		moved = move_up(data);
+	if (moved == 1)
 	{
-		if (move_up(data))
-		{
-			data->nb_pas++;
-			ft_printf("Nombres de pas : %d\n", data->nb_pas);
-		}
+		data->nb_pas++;
+		ft_printf("Nombres de pas : %d\n", data->nb_pas);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 12:48:59 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/10 13:26:27 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 09:52:03 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int	ft_stlen(const char *s)
 char	*ft_strjoin(char *s1, const char *s2)
 {
 	char	*res;
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
 
+	j = 0;
+	i = 0;
 	res = malloc(sizeof(char) * (ft_stlen(s1) + ft_stlen(s2) + 1));
 	if (!res)
 		return (NULL);
@@ -45,4 +47,3 @@ char	*ft_strjoin(char *s1, const char *s2)
 	free(s1);
 	return (res);
 }
-
