@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 10:26:59 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:04:01 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ char	**is_validber(char **av, t_data *data)
 {
 	char	**ber;
 
+	if (ft_strcmp(".ber", av[1] + len(av[1]) - 4))
+		return (0);
 	ber = put_in_ber(av[1]);
 	if (!ber)
 		return (0);

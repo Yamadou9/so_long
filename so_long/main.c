@@ -6,13 +6,13 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 10:51:05 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:45:20 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	close_window(t_data *data)
+int	close_window(t_data *data, int success)
 {
 	free_all(data->map);
 	free_all(data->map_bis);
@@ -20,29 +20,8 @@ int	close_window(t_data *data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	exit(0);
-	return (0);
-}
-
-int	handle_keypress(int keycode, void *param)
-{
-	(void)param;
-	ft_printf("tu appuie sur la touche : %d \n", keycode);
-	if (keycode == 65307)
-		return (1);
-	return (0);
-}
-
-int	on_destroy(int keycode, void *param)
-{
-	t_data	*data;
-
-	data = (t_data *)param;
-	if (!handle_keypress(keycode, param))
-		return (0);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	if (success == 1)
+		ft_printf("Nombres de pas : %d\n\n  FELICITATIONS\n\n", data->nb_pas + 1);
 	exit(0);
 	return (0);
 }
@@ -110,9 +89,8 @@ int	main(int ac, char **av)
 		write(2, "fenetre non cree\n", 18);
 		return (free_all(data.map), free_all(data.map_bis), 0);
 	}
-	initialisation(&data);
-	if (!its_playable(&data, data.map_bis, data.perso.y, data.perso.x))
-		return (write(2, "Map non playable\n", 17), close_window(&data), 0);
+	if (!initialisation(&data))
+		return (0);
 	mlx_key_hook(data.win_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);

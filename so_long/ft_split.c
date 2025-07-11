@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:49:15 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 10:20:59 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:05:57 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	ft_countword(char const *s, char c)
 	word = 0;
 	i = 0;
 	set = 1;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		if (set == 1 && s[i] != c)

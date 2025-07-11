@@ -6,11 +6,34 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:07:57 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 10:21:47 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:29:34 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	pos_perso(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while ((*data).map[i])
+	{
+		j = 0;
+		while ((*data).map[i][j])
+		{
+			if (((*data).map[i][j]) == 'P')
+			{
+				(*data).perso.y = i;
+				(*data).perso.x = j;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void	extend_playeur(char **map, int x, int y)
 {

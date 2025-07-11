@@ -6,11 +6,21 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 12:48:59 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 09:52:03 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:02:16 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
 
 int	ft_stlen(const char *s)
 {

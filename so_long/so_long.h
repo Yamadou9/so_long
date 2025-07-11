@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 10:13:45 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:39:33 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ int		is_rectangle(char **ber);
 int		len(char *s);
 void	*recup_image(char c, t_data *data, int x, int y);
 void	put_sol(t_data data, int longeur, int largeur, char **ber);
-void	initialisation(t_data *data);
+int		initialisation(t_data *data);
 int		game(int keycode, void *param);
 void	put_img(t_data *data, void *image, int y, int x);
 int		its_playable(t_data *data, char **map, int x, int y);
 char	**is_validber(char **av, t_data *data);
-int		close_window(t_data *param);
+int		close_window(t_data *param, int success);
 char	**put_in_ber(char *fichier);
 void	free_all(char **map);
 void	free_image(t_data *data);
@@ -84,9 +84,11 @@ char	*ft_strjoin(char *s1, char const *s2);
 int		init_image(t_data *data);
 int		init_image2(t_data *data);
 int		init_image3(t_data *data);
-void 	put_sol(t_data data, int longeur, int largeur, char **ber);
+void	put_sol(t_data data, int longeur, int largeur, char **ber);
 void	free_image(t_data *data);
 void	*p_image(t_data *data, char *image);
 int		other(char *line);
+int		ft_strcmp(char *s1, char *s2);
+void	pos_perso(t_data *data);
 
 # endif
