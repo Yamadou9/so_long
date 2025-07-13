@@ -94,7 +94,7 @@ int	init_image(t_data *data)
 	data->image.dos = p_image(data, "image/dos.xpm");
 	if (!data->image.dos)
 		return (free_image(data), 0);
-	data->image.collect = p_image(data, "image/collect.xpm");
+	data->image.collect = p_image(data, "image/coll.xpm");
 	if (!data->image.collect)
 		return (free_image(data), 0);
 	data->image.door = p_image(data, "image/door_open.xpm");
@@ -140,7 +140,7 @@ int	init_image3(t_data *data)
 	data->image.door_close = p_image(data, "image/door_close.xpm");
 	if (!data->image.door_close)
 		return (free_image(data), 0);
-	data->image.boule = p_image(data, "image/boule.xpm");
+	data->image.boule = p_image(data, "image/fromage.xpm");
 	if (!data->image.boule)
 		return (free_image(data), 0);
 	data->image.chiffre_0 = p_image2(data, "image/0.xpm");

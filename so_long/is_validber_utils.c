@@ -80,7 +80,7 @@ int	other(char *line)
 	{
 		if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'C' && line[i] != 'P' && line[i] != 'E'
-			&& line[i] != '\n' && line[i] != '\0')
+			&& line[i] != '\n' && line[i] != '\0' && line[i] != 'R')
 			return (1);
 		i++;
 	}
