@@ -6,46 +6,53 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:52:37 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 14:38:16 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:48:55 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void mon_mlx_destroy_image(void *ptr, void *image)
+{
+	if (ptr && image)
+		mlx_destroy_image(ptr, image);
+}
+
 void	free_image(t_data *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->image.face);
-	mlx_destroy_image(data->mlx_ptr, data->image.droit);
-	mlx_destroy_image(data->mlx_ptr, data->image.left);
-	mlx_destroy_image(data->mlx_ptr, data->image.dos);
-	mlx_destroy_image(data->mlx_ptr, data->image.sol);
-	mlx_destroy_image(data->mlx_ptr, data->image.cointbd);
-	mlx_destroy_image(data->mlx_ptr, data->image.cointhg);
-	mlx_destroy_image(data->mlx_ptr, data->image.cointhd);
-	mlx_destroy_image(data->mlx_ptr, data->image.cointbg);
-	mlx_destroy_image(data->mlx_ptr, data->image.mur_haut);
-	mlx_destroy_image(data->mlx_ptr, data->image.mur_gauche);
-	mlx_destroy_image(data->mlx_ptr, data->image.mur_droit);
-	mlx_destroy_image(data->mlx_ptr, data->image.mur_bas);
-	mlx_destroy_image(data->mlx_ptr, data->image.collect);
-	mlx_destroy_image(data->mlx_ptr, data->image.door);
-	mlx_destroy_image(data->mlx_ptr, data->image.boule);
-	mlx_destroy_image(data->mlx_ptr, data->image.trou);
-	mlx_destroy_image(data->mlx_ptr, data->image.door_close);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_0);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_1);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_2);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_3);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_4);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_5);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_6);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_7);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_8);
-	mlx_destroy_image(data->mlx_ptr, data->image.chiffre_9);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.face);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.droit);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.left);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.dos);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.sol);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.cointbd);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.cointhg);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.cointhd);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.cointbg);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.mur_haut);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.mur_gauche);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.mur_droit);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.mur_bas);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.collect);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.door);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.boule);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.trou);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.door_close);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_0);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_1);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_2);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_3);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_4);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_5);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_6);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_7);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_8);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_9);
 }
 
 void	init_imagenull(t_data *data)
 {
+	// ft_bzero(data, sizeof(t_data));
 	data->image.face = NULL;
 	data->image.droit = NULL;
 	data->image.left = NULL;
@@ -74,6 +81,7 @@ void	init_imagenull(t_data *data)
 	data->image.chiffre_7 = NULL;
 	data->image.chiffre_8 = NULL;
 	data->image.chiffre_9 = NULL;
+	data->image.renard = NULL;
 }
 
 int	init_image(t_data *data)
@@ -176,6 +184,9 @@ int	init_image4(t_data *data)
 	if (!data->image.chiffre_8)
 		return (free_image(data), 0);
 	data->image.chiffre_9 = p_image2(data, "image/9.xpm");
+	if (!data->image.chiffre_9)
+		return (free_image(data), 0);
+	data->image.renard = p_image(data, "image/fox-1.png.xpm");
 	if (!data->image.chiffre_9)
 		return (free_image(data), 0);
 	return (1);

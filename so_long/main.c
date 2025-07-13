@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 17:45:20 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:58:58 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	*recup_image(char c, t_data *data, int x, int y)
 		image = data->image.boule;
 	else if (c == 'E')
 		image = data->image.door_close;
+	else if (c == 'R')
+		image = data->image.renard;
 	return (image);
 }
 
@@ -82,7 +84,7 @@ int	main(int ac, char **av)
 		return (free_all(data.map), 0);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
-		return (free_all(data.map), free_all(data.map_bis), 0);
+		return (write(1, "MLX init!\n", 11), free_all(data.map), free_all(data.map_bis), 0);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
 	if (!data.win_ptr)
 	{
@@ -91,6 +93,7 @@ int	main(int ac, char **av)
 	}
 	if (!initialisation(&data))
 		return (0);
+	__builtin_printf("gggggggggggg\n");
 	mlx_key_hook(data.win_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);

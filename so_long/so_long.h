@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 14:37:52 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:02:32 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_image
 	void	*chiffre_7;
 	void	*chiffre_8;
 	void	*chiffre_9;
+	void	*renard;
 }	t_image;
 
 typedef struct s_perso
@@ -105,5 +106,6 @@ int		ft_putnbrimage(t_data data, int n, int pos);
 int		init_image4(t_data *data);
 int		len_nb(int nb);
 void	*p_image2(t_data *data, char *image);
+void	pos_door(t_data *data);
 
 #endif

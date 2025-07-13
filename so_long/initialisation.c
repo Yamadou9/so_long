@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 14:37:34 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:00:36 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	initialisation(t_data *data)
 {
 	pos_perso(data);
 	pos_door(data);
+
 	if (!init_image(data) || !init_image2(data)
 		|| !init_image3(data) || !init_image4(data))
 	{
@@ -108,10 +109,10 @@ int	initialisation(t_data *data)
 		exit(1);
 		return (0);
 	}
+
 	data->nb_pas = 0;
 	data->collect = nb_collect(data->map);
 	put_sol(*data, data->longeur, data->largeur, data->map);
-	if (!its_playable(data, (*data).map_bis, (*data).perso.y, (*data).perso.x))
-		return (write(2, "Map non playable\n", 17), close_window(data, 0), 0);
+	
 	return (1);
 }

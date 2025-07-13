@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 14:36:21 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 20:34:35 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	move_up(t_data *data)
 		if (data->collect == 0)
 			return (close_window(data, 1), 1);
 	}
+	else
+	{
 	data->map[data->perso.y][data->perso.x] = '0';
 	c = data->map[data->perso.y - 1][data->perso.x];
 	data->map[data->perso.y - 1][data->perso.x] = 'P';
@@ -121,6 +123,7 @@ int	move_up(t_data *data)
 	}
 	else
 		put_img(data, data->image.dos, data->perso.y, data->perso.x);
+	}
 	return (1);
 }
 

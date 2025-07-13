@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 17:04:01 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:07:15 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ char	**is_validber(char **av, t_data *data)
 	if (ft_strcmp(".ber", av[1] + len(av[1]) - 4))
 		return (0);
 	ber = put_in_ber(av[1]);
+	(*data).map = put_in_ber(av[1]);
 	if (!ber)
 		return (0);
 	data->longeur = is_rectangle(ber);
@@ -127,5 +128,10 @@ char	**is_validber(char **av, t_data *data)
 		return (free_all(ber), NULL);
 	if (!is_lockup(data, ber, data->longeur))
 		return (free_all(ber), NULL);
+	pos_perso(data);
+	pos_door(data);
+	(*data).map_bis = put_in_ber(av[1]);
+	if (!its_playable(data, (*data).map_bis, (*data).perso.y, (*data).perso.x))
+		return (write(2, "Map non playable\n", 17), free_all(ber), free_all((*data).map_bis), free_all((*data).map), NULL);
 	return (ber);
 }

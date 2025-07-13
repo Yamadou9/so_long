@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:07:57 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 17:29:34 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:54:13 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pos_perso(t_data *data)
 
 void	extend_playeur(char **map, int x, int y)
 {
-	if (map[x][y] == '1' || map[x][y] == 'E' || map[x][y] == 'O')
+	if (map[x][y] == '1' || map[x][y] == 'E' || map[x][y] == 'O' || map[x][y] == 'R')
 		return ;
 	map[x][y] = 'O';
 	extend_playeur(map, x + 1, y);
