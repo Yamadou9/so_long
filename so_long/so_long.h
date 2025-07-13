@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 17:39:33 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 14:37:52 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ typedef struct s_image
 	void	*boule;
 	void	*trou;
 	void	*door_close;
+	void	*chiffre_0;
+	void	*chiffre_1;
+	void	*chiffre_2;
+	void	*chiffre_3;
+	void	*chiffre_4;
+	void	*chiffre_5;
+	void	*chiffre_6;
+	void	*chiffre_7;
+	void	*chiffre_8;
+	void	*chiffre_9;
 }	t_image;
 
 typedef struct s_perso
@@ -90,5 +100,10 @@ void	*p_image(t_data *data, char *image);
 int		other(char *line);
 int		ft_strcmp(char *s1, char *s2);
 void	pos_perso(t_data *data);
+void	*p_image2(t_data *data, char *image);
+int		ft_putnbrimage(t_data data, int n, int pos);
+int		init_image4(t_data *data);
+int		len_nb(int nb);
+void	*p_image2(t_data *data, char *image);
 
-# endif
+#endif

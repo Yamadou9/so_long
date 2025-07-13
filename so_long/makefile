@@ -6,7 +6,7 @@
 #    By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 18:43:27 by ydembele          #+#    #+#              #
-#    Updated: 2025/07/11 10:21:13 by ydembele         ###   ########.fr        #
+#    Updated: 2025/07/13 13:54:23 by ydembele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ GNL_DIR     = get_next_line_malloc
 INCLUDES    = -I$(MLX_DIR) -I$(PRINTF_DIR) -I$(GNL_DIR) -I/usr/include
 
 SRCS =	main.c is_validber.c initialisation.c move.c playable.c ft_split.c \
-		ft_strjoin.c is_validber_utils.c init_image.c\
+		ft_strjoin.c is_validber_utils.c init_image.c ft_nbrimage.c\
 		$(GNL_DIR)/get_next_line.c \
 		$(GNL_DIR)/get_next_line_utils.c
 

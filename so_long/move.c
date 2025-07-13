@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/12 18:15:49 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/13 14:36:21 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int	game(int keycode, void *param)
 	{
 		data->nb_pas++;
 		ft_printf("Nombres de pas : %d\n", data->nb_pas);
+		ft_putnbrimage(*data, data->nb_pas, len_nb(data->nb_pas) - 1);
 	}
 	return (0);
 }
