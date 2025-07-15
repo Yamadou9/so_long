@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:52:37 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 20:02:24 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:04:53 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	free_image(t_data *data)
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_8);
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_9);
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.renard);
-	
 }
 
 void	init_imagenull(t_data *data)

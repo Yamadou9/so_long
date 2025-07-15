@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 19:57:18 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:07:55 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int	main(int ac, char **av)
 		return (0);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
-		return (write(1, "MLX", 3), free_all(data.map), free_all(data.map_bis), 0);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
-	if (!data.win_ptr)
 	{
-		write(2, "fenetre non cree\n", 18);
+		write(2, "Mlx\n", 4);
 		return (free_all(data.map), free_all(data.map_bis), 0);
 	}
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
+	if (!data.win_ptr)
+		return (perror("win"), free_all(data.map), free_all(data.map_bis), 0);
 	if (!initialisation(&data))
 		return (0);
 	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);

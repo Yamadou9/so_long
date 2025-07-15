@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 19:57:34 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:09:15 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,8 @@ int	is_lockup(t_data *data, char **ber, int longr)
 	return (1);
 }
 
-int is_validber(char **av, t_data *data)
+int	is_validber(char **av, t_data *data)
 {
-
 	if (ft_strcmp(".ber", av[1] + len(av[1]) - 4))
 		return (0);
 	(*data).map = put_in_ber(av[1]);
@@ -130,6 +129,9 @@ int is_validber(char **av, t_data *data)
 	pos_door(data);
 	(*data).map_bis = put_in_ber(av[1]);
 	if (!its_playable(data, (*data).map_bis, (*data).perso.y, (*data).perso.x))
-		return (write(2, "Map\n", 4), free_all((*data).map_bis), free_all((*data).map), 0);
+	{
+		write(2, "Map\n", 4);
+		return (free_all((*data).map_bis), free_all((*data).map), 0);
+	}
 	return (1);
 }
