@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 22:58:58 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:57:18 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,11 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (0);
-	data.map = is_validber(av, &data);
-	if (!data.map)
-		return (write(2, "map no valid\n", 14), free(data.map), 0);
-	data.map_bis = is_validber(av, &data);
-	if (!data.map_bis)
-		return (free_all(data.map), 0);
+	if (!is_validber(av, &data))
+		return (0);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
-		return (write(1, "MLX init!\n", 11), free_all(data.map), free_all(data.map_bis), 0);
+		return (write(1, "MLX", 3), free_all(data.map), free_all(data.map_bis), 0);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
 	if (!data.win_ptr)
 	{
@@ -93,8 +89,9 @@ int	main(int ac, char **av)
 	}
 	if (!initialisation(&data))
 		return (0);
-	__builtin_printf("gggggggggggg\n");
-	mlx_key_hook(data.win_ptr, game, &data);
+	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);
+	mlx_hook(data.win_ptr, 3, 1L << 1, key_release, &data);
+	mlx_loop_hook(data.mlx_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);

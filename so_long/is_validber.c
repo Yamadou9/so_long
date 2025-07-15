@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:48:06 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 23:07:15 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:57:34 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,30 +108,28 @@ int	is_lockup(t_data *data, char **ber, int longr)
 	return (1);
 }
 
-char	**is_validber(char **av, t_data *data)
+int is_validber(char **av, t_data *data)
 {
-	char	**ber;
 
 	if (ft_strcmp(".ber", av[1] + len(av[1]) - 4))
 		return (0);
-	ber = put_in_ber(av[1]);
 	(*data).map = put_in_ber(av[1]);
-	if (!ber)
+	if (!(*data).map)
 		return (0);
-	data->longeur = is_rectangle(ber);
+	data->longeur = is_rectangle((*data).map);
 	if (!data->longeur)
-		return (free_all(ber), NULL);
-	data->largeur = len(ber[0]);
-	if (!valid_count(ber))
-		return (free_all(ber), NULL);
+		return (free_all((*data).map), 0);
+	data->largeur = len((*data).map[0]);
+	if (!valid_count((*data).map))
+		return (free_all((*data).map), 0);
 	if (!data->longeur)
-		return (free_all(ber), NULL);
-	if (!is_lockup(data, ber, data->longeur))
-		return (free_all(ber), NULL);
+		return (free_all((*data).map), 0);
+	if (!is_lockup(data, (*data).map, data->longeur))
+		return (free_all((*data).map), 0);
 	pos_perso(data);
 	pos_door(data);
 	(*data).map_bis = put_in_ber(av[1]);
 	if (!its_playable(data, (*data).map_bis, (*data).perso.y, (*data).perso.x))
-		return (write(2, "Map non playable\n", 17), free_all(ber), free_all((*data).map_bis), free_all((*data).map), NULL);
-	return (ber);
+		return (write(2, "Map\n", 4), free_all((*data).map_bis), free_all((*data).map), 0);
+	return (1);
 }

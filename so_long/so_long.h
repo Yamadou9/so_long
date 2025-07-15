@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:10:45 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 23:02:32 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:53:14 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_perso
 	int	x;
 }	t_perso;
 
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+}	t_keys;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -74,6 +82,8 @@ typedef struct s_data
 	int			exit_y;
 	int			exit_x;
 	int			nb_pas;
+	int			move_delay;
+	t_keys		keys;
 }	t_data;
 
 int		is_rectangle(char **ber);
@@ -81,10 +91,10 @@ int		len(char *s);
 void	*recup_image(char c, t_data *data, int x, int y);
 void	put_sol(t_data data, int longeur, int largeur, char **ber);
 int		initialisation(t_data *data);
-int		game(int keycode, void *param);
+int		game(void *param);
 void	put_img(t_data *data, void *image, int y, int x);
 int		its_playable(t_data *data, char **map, int x, int y);
-char	**is_validber(char **av, t_data *data);
+int		is_validber(char **av, t_data *data);
 int		close_window(t_data *param, int success);
 char	**put_in_ber(char *fichier);
 void	free_all(char **map);
@@ -107,5 +117,7 @@ int		init_image4(t_data *data);
 int		len_nb(int nb);
 void	*p_image2(t_data *data, char *image);
 void	pos_door(t_data *data);
+int		key_release(int keycode, t_data *data);
+int		key_press(int keycode, t_data *data);
 
 #endif

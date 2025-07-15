@@ -6,13 +6,13 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:52:37 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/13 22:48:55 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:02:24 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void mon_mlx_destroy_image(void *ptr, void *image)
+void	mon_mlx_destroy_image(void *ptr, void *image)
 {
 	if (ptr && image)
 		mlx_destroy_image(ptr, image);
@@ -48,6 +48,8 @@ void	free_image(t_data *data)
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_7);
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_8);
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.chiffre_9);
+	mon_mlx_destroy_image(data->mlx_ptr, data->image.renard);
+	
 }
 
 void	init_imagenull(t_data *data)
@@ -102,7 +104,7 @@ int	init_image(t_data *data)
 	data->image.dos = p_image(data, "image/dos.xpm");
 	if (!data->image.dos)
 		return (free_image(data), 0);
-	data->image.collect = p_image(data, "image/coll.xpm");
+	data->image.collect = p_image(data, "image/collect.xpm");
 	if (!data->image.collect)
 		return (free_image(data), 0);
 	data->image.door = p_image(data, "image/door_open.xpm");
@@ -148,7 +150,7 @@ int	init_image3(t_data *data)
 	data->image.door_close = p_image(data, "image/door_close.xpm");
 	if (!data->image.door_close)
 		return (free_image(data), 0);
-	data->image.boule = p_image(data, "image/fromage.xpm");
+	data->image.boule = p_image(data, "image/boule.xpm");
 	if (!data->image.boule)
 		return (free_image(data), 0);
 	data->image.chiffre_0 = p_image2(data, "image/0.xpm");
@@ -187,7 +189,7 @@ int	init_image4(t_data *data)
 	if (!data->image.chiffre_9)
 		return (free_image(data), 0);
 	data->image.renard = p_image(data, "image/fox-1.png.xpm");
-	if (!data->image.chiffre_9)
+	if (!data->image.renard)
 		return (free_image(data), 0);
 	return (1);
 }
