@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 20:07:55 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/18 18:32:50 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	*recup_image(char c, t_data *data, int x, int y)
 int	main(int ac, char **av)
 {
 	t_data	data;
+	int		d;
+	int		l;
 
 	if (ac != 2)
 		return (0);
@@ -84,14 +86,14 @@ int	main(int ac, char **av)
 		write(2, "Mlx\n", 4);
 		return (free_all(data.map), free_all(data.map_bis), 0);
 	}
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 64 * data.largeur, 64 * data.longeur, "so_long");
+	d = 64 * data.largeur;
+	l = 64 * data.longeur;
+	data.win_ptr = mlx_new_window(data.mlx_ptr, d, l, "so_long");
 	if (!data.win_ptr)
 		return (perror("win"), free_all(data.map), free_all(data.map_bis), 0);
 	if (!initialisation(&data))
 		return (0);
 	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);
-	mlx_hook(data.win_ptr, 3, 1L << 1, key_release, &data);
-	mlx_loop_hook(data.mlx_ptr, game, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);

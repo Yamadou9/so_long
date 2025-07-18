@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 19:58:47 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/18 18:16:33 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,29 +128,26 @@ int	move_up(t_data *data)
 	return (1);
 }
 
-int	game(void *param)
+int	key_press(int keycode, t_data *data)
 {
-	t_data	*data;
 	int		moved;
 
 	moved = 0;
-	data = (t_data *)param;
-	if (data->move_delay++ != 999)
-		return (0);
-	data->move_delay = 0;
-	if ((*data).keys.d == 1)
+	if (keycode == 65363 || keycode == 'd')
 		moved = move_right(data);
-	if ((*data).keys.a == 1)
+	if (keycode == 65361 || keycode == 'a')
 		moved = move_left(data);
-	if ((*data).keys.s == 1)
+	if (keycode == 65364 || keycode == 's')
 		moved = move_down(data);
-	if ((*data).keys.w == 1)
+	if (keycode == 65362 || keycode == 'w')
 		moved = move_up(data);
+	if (keycode == 65307)
+		close_window(data, 0);
 	if (moved == 1)
 	{
 		data->nb_pas++;
 		ft_printf("Nombres de pas : %d\n", data->nb_pas);
 		ft_putnbrimage(*data, data->nb_pas, len_nb(data->nb_pas) - 1);
 	}
-	return (0);
+	return (1);
 }

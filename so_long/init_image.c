@@ -6,11 +6,13 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:52:37 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 20:04:53 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/18 18:47:20 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_bzero(void *s, size_t n);
 
 void	mon_mlx_destroy_image(void *ptr, void *image)
 {
@@ -51,43 +53,9 @@ void	free_image(t_data *data)
 	mon_mlx_destroy_image(data->mlx_ptr, data->image.renard);
 }
 
-void	init_imagenull(t_data *data)
-{
-	// ft_bzero(data, sizeof(t_data));
-	data->image.face = NULL;
-	data->image.droit = NULL;
-	data->image.left = NULL;
-	data->image.dos = NULL;
-	data->image.collect = NULL;
-	data->image.door = NULL;
-	data->image.sol = NULL;
-	data->image.mur_bas = NULL;
-	data->image.mur_gauche = NULL;
-	data->image.mur_haut = NULL;
-	data->image.mur_droit = NULL;
-	data->image.cointbd = NULL;
-	data->image.cointbg = NULL;
-	data->image.cointhd = NULL;
-	data->image.cointhg = NULL;
-	data->image.boule = NULL;
-	data->image.door_close = NULL;
-	data->image.trou = NULL;
-	data->image.chiffre_0 = NULL;
-	data->image.chiffre_1 = NULL;
-	data->image.chiffre_2 = NULL;
-	data->image.chiffre_3 = NULL;
-	data->image.chiffre_4 = NULL;
-	data->image.chiffre_5 = NULL;
-	data->image.chiffre_6 = NULL;
-	data->image.chiffre_7 = NULL;
-	data->image.chiffre_8 = NULL;
-	data->image.chiffre_9 = NULL;
-	data->image.renard = NULL;
-}
-
 int	init_image(t_data *data)
 {
-	init_imagenull(data);
+	ft_bzero(&data->image, sizeof(t_image));
 	data->image.sol = p_image(data, "image/sol.xpm");
 	if (!data->image.sol)
 		return (free_image(data), 0);

@@ -6,11 +6,22 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 12:48:59 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/11 17:02:16 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/18 18:34:42 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = s;
+	while (i < n)
+		str[i++] = 0;
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {
