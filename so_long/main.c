@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/18 18:32:50 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/19 15:23:06 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ int	close_window(t_data *data, int success)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	if (success == 1)
+	if (data->collect == 0 && success == 0)
 		ft_printf("Nombres de pas : %d\n\n  FELICITATIONS\n\n", data->nb_pas + 1);
+	else if (success == -1)
+		ft_printf("\n\n  FENETRE FERMEE\n\n");
+	else if (data->collect != 0 && success == 0)
+		ft_printf("\n\nLE RENARD A PRIS T'ES FROMAGE\n\n");
+	else
+		ft_printf("\n\n  FENETRE FERMEE\n\n");
 	exit(0);
 	return (0);
 }

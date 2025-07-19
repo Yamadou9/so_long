@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/18 18:16:33 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/19 15:11:23 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	key_press(int keycode, t_data *data)
 	if (keycode == 65362 || keycode == 'w')
 		moved = move_up(data);
 	if (keycode == 65307)
-		close_window(data, 0);
+		close_window(data, -1);
 	if (moved == 1)
 	{
 		data->nb_pas++;
