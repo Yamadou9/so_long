@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:51:30 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/15 20:01:01 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/19 15:50:45 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	initialisation(t_data *data)
 		|| !init_image3(data) || !init_image4(data))
 	{
 		write(2, "Chargement d’image échoué\n", 30);
-		exit(1);
 		return (0);
 	}
 	data->nb_pas = 0;

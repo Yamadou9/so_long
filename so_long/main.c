@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:54:52 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/19 15:23:06 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:38:23 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	close_window(t_data *data, int success)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	if (data->collect == 0 && success == 0)
-		ft_printf("Nombres de pas : %d\n\n  FELICITATIONS\n\n", data->nb_pas + 1);
-	else if (success == -1)
+	if (success == -1)
 		ft_printf("\n\n  FENETRE FERMEE\n\n");
-	else if (data->collect != 0 && success == 0)
+	else if (success == 'R')
 		ft_printf("\n\nLE RENARD A PRIS T'ES FROMAGE\n\n");
+	else if (success == 'E')
+		ft_printf("Nombres de pas : %d\n\n  FELICITATIONS\n\n", data->nb_pas + 1);
 	else
 		ft_printf("\n\n  FENETRE FERMEE\n\n");
 	exit(0);
@@ -98,7 +98,7 @@ int	main(int ac, char **av)
 	if (!data.win_ptr)
 		return (perror("win"), free_all(data.map), free_all(data.map_bis), 0);
 	if (!initialisation(&data))
-		return (0);
+		return (close_window(&data, 0), 0);
 	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: ydembele <ydembele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:39:21 by ydembele          #+#    #+#             */
-/*   Updated: 2025/07/19 15:11:23 by ydembele         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:39:33 by ydembele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	move_right(t_data *data)
 	if (c == 'E' || c == 'R')
 	{
 		if (data->collect == 0 || c == 'R')
-			return (close_window(data, 0), 1);
+			return (close_window(data, c), 1);
 		return (0);
 	}
 	data->map[data->perso.y][data->perso.x] = '0';
@@ -51,7 +51,7 @@ int	move_left(t_data *data)
 	if (c == 'E' || c == 'R')
 	{
 		if (data->collect == 0 || c == 'R')
-			return (close_window(data, 0), 1);
+			return (close_window(data, c), 1);
 		return (0);
 	}
 	data->map[data->perso.y][data->perso.x] = '0';
@@ -80,7 +80,7 @@ int	move_down(t_data *data)
 	if (c == 'E' || c == 'R')
 	{
 		if (data->collect == 0 || c == 'R')
-			return (close_window(data, 0), 1);
+			return (close_window(data, c), 1);
 		return (0);
 	}
 	data->map[data->perso.y][data->perso.x] = '0';
@@ -109,7 +109,7 @@ int	move_up(t_data *data)
 	if (c == 'E' || c == 'R')
 	{
 		if (data->collect == 0 || c == 'R')
-			return (close_window(data, 0), 1);
+			return (close_window(data, c), 1);
 		return (0);
 	}
 	data->map[data->perso.y][data->perso.x] = '0';
